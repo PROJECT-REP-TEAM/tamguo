@@ -1,5 +1,6 @@
 package com.tamguo;
 
+import com.xuxueli.crawler.loader.strategy.HtmlUnitPageLoader;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Test;
@@ -18,7 +19,6 @@ import com.tamguo.model.enums.QuestionType;
 import com.tamguo.model.vo.PaperVo;
 import com.xuxueli.crawler.XxlCrawler;
 import com.xuxueli.crawler.parser.PageParser;
-import com.xuxueli.crawler.parser.strategy.HtmlUnitPageLoader;
 import com.xuxueli.crawler.rundata.RunData;
 
 // 北京模拟试卷，真题试卷已经爬取完毕
@@ -34,13 +34,13 @@ public class PaperCrawler {
 	// 140000 山西 | 350000 福建 | 340000 安徽 | 220000 吉林 | 150000 内蒙古 | 640000 宁夏 | 650000 新疆 | 广西 450000 | 210000 辽宁
 	// 230000 黑龙江 | 610000 陕西 | 360000 江西 | 440000 广东 | 430000 湖南 | 460000 海南 | 530000 云南 | 510000 四川 | 630000 青海
 	// 620000 甘肃  | 130000 河北 | 540000 西藏 | 贵州 520000
-	private final String AREA_ID = "610000";
+	private final String AREA_ID = "360000";
 	// 年份
-	private final String YEAR = "2017";
+	private final String YEAR = "2016";
 	// 真题试卷             类型(1:真题试卷,2:模拟试卷,3:押题预测,4:名校精品)
-	private final String PAPER_TYPE = "2";
+	private final String PAPER_TYPE = "4";
 	// 开始采集的URL
-	private final String START_URL = "https://tiku.baidu.com/tikupc/paperlist/1bfd700abb68a98271fefa04-20-4-2017-1306-1-download";
+	private final String START_URL = "https://tiku.baidu.com/tikupc/paperlist/1bfd700abb68a98271fefa04-20-7-2016-1360-1-download";
 	
 	private RunData runData;
 	

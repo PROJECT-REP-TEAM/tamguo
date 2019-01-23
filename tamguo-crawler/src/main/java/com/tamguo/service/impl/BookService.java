@@ -2,25 +2,22 @@ package com.tamguo.service.impl;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.tamguo.config.redis.CacheService;
-import com.tamguo.dao.ChapterMapper;
-import com.tamguo.dao.CourseMapper;
-import com.tamguo.dao.CrawlerQuestionMapper;
-import com.tamguo.dao.QuestionMapper;
-import com.tamguo.dao.SubjectMapper;
-import com.tamguo.model.ChapterEntity;
-import com.tamguo.model.CourseEntity;
-import com.tamguo.model.CrawlerQuestionEntity;
-import com.tamguo.model.QuestionEntity;
-import com.tamguo.model.SubjectEntity;
+import com.tamguo.dao.*;
+import com.tamguo.model.*;
 import com.tamguo.model.enums.QuestionType;
 import com.tamguo.model.vo.QuestionVo;
 import com.tamguo.service.IBookService;
 import com.xuxueli.crawler.XxlCrawler;
 import com.xuxueli.crawler.conf.XxlCrawlerConf;
+import com.xuxueli.crawler.loader.strategy.HtmlUnitPageLoader;
 import com.xuxueli.crawler.parser.PageParser;
-import com.xuxueli.crawler.parser.strategy.HtmlUnitPageLoader;
 import com.xuxueli.crawler.rundata.RunData;
 import com.xuxueli.crawler.util.FileUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.text.DecimalFormat;
@@ -29,12 +26,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.apache.commons.lang3.StringUtils;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class BookService implements IBookService {
@@ -59,6 +50,7 @@ public class BookService implements IBookService {
 
     @Override
     public void crawlerBook() {
+        new HtmlUnitPageLoader();
 		XxlCrawler crawler = new XxlCrawler.Builder()
 	            .setAllowSpread(false)
 	            .setThreadCount(20)
@@ -122,7 +114,7 @@ public class BookService implements IBookService {
 	                	question.setSubjectId(subject.getId());
 	                	
 	                	if (questionVo.getAnswerImages()!=null && questionVo.getAnswerImages().size() > 0) {
-                            Set<String> imagesSet = new HashSet<>(questionVo.getAnswerImages());
+                            Set<String> imagesSet = new HashSet<String>(questionVo.getAnswerImages());
                             for (String img: imagesSet) {
 
                                 // 下载图片文件
@@ -140,7 +132,7 @@ public class BookService implements IBookService {
                         }
 	                	
 	                	if (questionVo.getAnalysisImages()!=null && questionVo.getAnalysisImages().size() > 0) {
-                            Set<String> imagesSet = new HashSet<>(questionVo.getAnalysisImages());
+                            Set<String> imagesSet = new HashSet<String>(questionVo.getAnalysisImages());
                             for (String img: imagesSet) {
 
                                 // 下载图片文件
@@ -158,7 +150,7 @@ public class BookService implements IBookService {
                         }
 	                	
 	                	if (questionVo.getContentImages()!=null && questionVo.getContentImages().size() > 0) {
-                            Set<String> imagesSet = new HashSet<>(questionVo.getContentImages());
+                            Set<String> imagesSet = new HashSet<String>(questionVo.getContentImages());
                             for (String img: imagesSet) {
 
                                 // 下载图片文件

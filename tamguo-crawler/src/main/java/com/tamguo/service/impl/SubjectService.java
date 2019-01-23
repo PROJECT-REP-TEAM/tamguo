@@ -1,19 +1,5 @@
 package com.tamguo.service.impl;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import org.apache.commons.lang3.StringUtils;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.alibaba.fastjson.JSONObject;
 import com.tamguo.dao.ChapterMapper;
 import com.tamguo.dao.CourseMapper;
@@ -26,6 +12,19 @@ import com.tamguo.service.ISubjectService;
 import com.xuxueli.crawler.XxlCrawler;
 import com.xuxueli.crawler.parser.PageParser;
 import com.xuxueli.crawler.rundata.RunData;
+import org.apache.commons.lang3.StringUtils;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 public class SubjectService implements ISubjectService{
@@ -46,7 +45,7 @@ public class SubjectService implements ISubjectService{
 	
 	private Set<String> questionUrls = new HashSet<String>();
 	
-	private Map<String, Object> chapterQuestionListMap = new HashMap<>();
+	private Map<String, Object> chapterQuestionListMap = new HashMap<String, Object>();
 
 	private RunData runData;
 	

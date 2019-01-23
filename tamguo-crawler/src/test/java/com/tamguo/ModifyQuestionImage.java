@@ -1,17 +1,16 @@
 package com.tamguo;
 
-import java.util.Arrays;
-
+import com.baomidou.mybatisplus.mapper.Condition;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.tamguo.model.QuestionEntity;
+import com.tamguo.service.IQuestionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.baomidou.mybatisplus.mapper.Condition;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.tamguo.model.QuestionEntity;
-import com.tamguo.service.IQuestionService;
+import java.util.Arrays;
 
 /**
  * Test - 修改用户图片
@@ -33,7 +32,7 @@ public class ModifyQuestionImage {
 		Integer size = 100;
 		
 		while(true) {
-			Page<QuestionEntity> page = new Page<>(current , size);
+			Page<QuestionEntity> page = new Page<QuestionEntity>(current , size);
 			Page<QuestionEntity> entitys = iQuestionService.selectPage(page , Condition.create().orderAsc(Arrays.asList("id")));
 			if(entitys.getCurrent() > 759) {
 				break;

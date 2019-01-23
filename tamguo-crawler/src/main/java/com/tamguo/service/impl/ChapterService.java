@@ -1,25 +1,9 @@
 package com.tamguo.service.impl;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.Condition;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.tamguo.dao.ChapterMapper;
-import com.tamguo.dao.CourseMapper;
-import com.tamguo.dao.CrawlerChapterMapper;
-import com.tamguo.dao.CrawlerQuestionMapper;
-import com.tamguo.dao.SubjectMapper;
+import com.tamguo.dao.*;
 import com.tamguo.model.ChapterEntity;
 import com.tamguo.model.CourseEntity;
 import com.tamguo.model.CrawlerChapterEntity;
@@ -28,6 +12,17 @@ import com.tamguo.service.IChapterService;
 import com.xuxueli.crawler.XxlCrawler;
 import com.xuxueli.crawler.parser.PageParser;
 import com.xuxueli.crawler.rundata.RunData;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class ChapterService implements IChapterService{
@@ -43,7 +38,7 @@ public class ChapterService implements IChapterService{
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
-	private Set<String> urls = new HashSet<>();
+	private Set<String> urls = new HashSet<String>();
 	
 	private RunData runData;
 	
@@ -56,7 +51,7 @@ public class ChapterService implements IChapterService{
 		int page = 1;
 		int pageSize = 100;
 		while(true) {
-			Page<ChapterEntity> chapterPage = new Page<>(page, pageSize);
+			Page<ChapterEntity> chapterPage = new Page<ChapterEntity>(page, pageSize);
 			List<ChapterEntity> chapterList =  chapterMapper.selectPage(chapterPage, Condition.create().orderAsc(Arrays.asList("id")));
 			for(int i=0 ;i<chapterList.size() ; i++) {
 				// 处理数据
