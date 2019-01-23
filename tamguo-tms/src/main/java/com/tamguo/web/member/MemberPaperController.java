@@ -1,15 +1,5 @@
 package com.tamguo.web.member;
 
-import java.util.Map;
-import javax.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.Condition;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -20,6 +10,16 @@ import com.tamguo.modules.tiku.model.PaperEntity;
 import com.tamguo.modules.tiku.model.enums.QuestionTypeEnum;
 import com.tamguo.modules.tiku.service.IPaperService;
 import com.tamguo.utils.ShiroUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 public class MemberPaperController {
@@ -29,7 +29,7 @@ public class MemberPaperController {
 	
 
 	@RequestMapping(value = "/member/paper.html", method = RequestMethod.GET)
-	public ModelAndView paper(ModelAndView model, HttpSession session){
+	public ModelAndView paper(ModelAndView model){
 		model.setViewName("member/paperList");
 		return model;
 	}
@@ -45,7 +45,7 @@ public class MemberPaperController {
 	@ResponseBody
 	public Map<String, Object> paperList(String name , Integer page , Integer limit , HttpSession session){
 		MemberEntity member = ((MemberEntity)session.getAttribute("currMember"));
-		Page<PaperEntity> list = iPaperService.selectPage(new Page<>(page , limit) , Condition.create().like("name", name).eq("creater_id", member.getId()));
+		Page<PaperEntity> list = iPaperService.selectPage(new Page<PaperEntity>(page , limit) , Condition.create().like("name", name).eq("creater_id", member.getId()));
 		return Result.jqGridResult(list.getRecords(), list.getTotal(), limit, page, list.getPages());
 	}
 	

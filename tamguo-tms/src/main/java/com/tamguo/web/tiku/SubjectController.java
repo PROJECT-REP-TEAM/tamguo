@@ -1,10 +1,13 @@
 package com.tamguo.web.tiku;
 
-import java.util.Arrays;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.alibaba.fastjson.JSONArray;
+import com.baomidou.mybatisplus.mapper.Condition;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.tamguo.common.utils.Result;
+import com.tamguo.modules.sys.service.ISysAreaService;
+import com.tamguo.modules.tiku.model.*;
+import com.tamguo.modules.tiku.service.*;
+import com.tamguo.utils.BrowserUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,22 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.alibaba.fastjson.JSONArray;
-import com.baomidou.mybatisplus.mapper.Condition;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.tamguo.common.utils.Result;
-import com.tamguo.modules.sys.service.ISysAreaService;
-import com.tamguo.modules.tiku.model.KnowPointEntity;
-import com.tamguo.modules.tiku.model.ChapterEntity;
-import com.tamguo.modules.tiku.model.CourseEntity;
-import com.tamguo.modules.tiku.model.PaperEntity;
-import com.tamguo.modules.tiku.model.SubjectEntity;
-import com.tamguo.modules.tiku.service.IKnowPointService;
-import com.tamguo.modules.tiku.service.IChapterService;
-import com.tamguo.modules.tiku.service.ICourseService;
-import com.tamguo.modules.tiku.service.IPaperService;
-import com.tamguo.modules.tiku.service.ISubjectService;
-import com.tamguo.utils.BrowserUtils;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Controller - 考试（高考，建造师，医药师）
@@ -73,7 +63,7 @@ public class SubjectController {
 			chapterList = iChapterService.selectList(Condition.create().eq("book_id", book.getId()));
 		}
 		// 获取最新的试卷
-		Page<PaperEntity> paperPage = iPaperService.selectPage(new Page<>(1, 15) , Condition.create().eq("subject_id", subjectId).orderDesc(Arrays.asList("id")));
+		Page<PaperEntity> paperPage = iPaperService.selectPage(new Page<PaperEntity>(1, 15) , Condition.create().eq("subject_id", subjectId).orderDesc(Arrays.asList("id")));
     	model.addObject("subject", subject);
     	model.addObject("course" , course);
     	model.addObject("courseList", courseList);
@@ -103,4 +93,5 @@ public class SubjectController {
 		JSONArray list = iSubjectService.getSubjectTree();
 		return Result.successResult(list);
 	}
+
 }

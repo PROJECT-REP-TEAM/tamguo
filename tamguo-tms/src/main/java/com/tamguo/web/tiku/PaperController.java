@@ -1,18 +1,5 @@
 package com.tamguo.web.tiku;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.baomidou.mybatisplus.mapper.Condition;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.tamguo.common.utils.SystemConstant;
@@ -27,6 +14,18 @@ import com.tamguo.modules.tiku.service.IQuestionService;
 import com.tamguo.modules.tiku.service.ISubjectService;
 import com.tamguo.utils.BrowserUtils;
 import com.tamguo.utils.PageUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Controller - 试卷
@@ -119,10 +118,10 @@ public class PaperController {
 			model.addObject("questionList", iQuestionService.selectList(Condition.create().eq("paper_id", paperId)));
 
 	    	// 获取推荐试卷
-			model.addObject("zhentiPaperList", iPaperService.selectPage(new Page<>(1, 5) , Condition.create().eq("subject_id", paper.getSubjectId()).eq("type",SystemConstant.ZHENGTI_PAPER_ID)).getRecords());
-			model.addObject("moniPaperList", iPaperService.selectPage(new Page<>(1, 5) , Condition.create().eq("subject_id", paper.getSubjectId()).eq("type",SystemConstant.MONI_PAPER_ID)).getRecords());
-			model.addObject("yatiPaperList", iPaperService.selectPage(new Page<>(1, 5) , Condition.create().eq("subject_id", paper.getSubjectId()).eq("type",SystemConstant.YATI_PAPER_ID)).getRecords());
-			model.addObject("hotPaperList", iPaperService.selectPage(new Page<>(1, 5) , Condition.create().eq("subject_id", paper.getSubjectId()).eq("course_id", paper.getCourseId())).getRecords());
+			model.addObject("zhentiPaperList", iPaperService.selectPage(new Page<PaperEntity>(1, 5) , Condition.create().eq("subject_id", paper.getSubjectId()).eq("type",SystemConstant.ZHENGTI_PAPER_ID)).getRecords());
+			model.addObject("moniPaperList", iPaperService.selectPage(new Page<PaperEntity>(1, 5) , Condition.create().eq("subject_id", paper.getSubjectId()).eq("type",SystemConstant.MONI_PAPER_ID)).getRecords());
+			model.addObject("yatiPaperList", iPaperService.selectPage(new Page<PaperEntity>(1, 5) , Condition.create().eq("subject_id", paper.getSubjectId()).eq("type",SystemConstant.YATI_PAPER_ID)).getRecords());
+			model.addObject("hotPaperList", iPaperService.selectPage(new Page<PaperEntity>(1, 5) , Condition.create().eq("subject_id", paper.getSubjectId()).eq("course_id", paper.getCourseId())).getRecords());
 			
 
 			if(BrowserUtils.isMobile(request.getHeader("user-agent"))) {
