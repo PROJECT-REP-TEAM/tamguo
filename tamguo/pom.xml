@@ -5,7 +5,7 @@
 	<groupId>com.tamguo</groupId>
 	<artifactId>tamguo</artifactId>
 	<version>V1.0.1</version>
-	<name>探果网</name>
+	<name>tamguo</name>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

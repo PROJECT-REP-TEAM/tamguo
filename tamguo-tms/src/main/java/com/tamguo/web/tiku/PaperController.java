@@ -7,6 +7,7 @@ import com.tamguo.modules.sys.model.SysAreaEntity;
 import com.tamguo.modules.sys.service.ISysAreaService;
 import com.tamguo.modules.tiku.model.CourseEntity;
 import com.tamguo.modules.tiku.model.PaperEntity;
+import com.tamguo.modules.tiku.model.QuestionEntity;
 import com.tamguo.modules.tiku.model.SubjectEntity;
 import com.tamguo.modules.tiku.service.ICourseService;
 import com.tamguo.modules.tiku.service.IPaperService;
@@ -115,8 +116,9 @@ public class PaperController {
 			model.addObject("paper", paper);
 			model.addObject("subject", StringUtils.isEmpty(paper.getSubjectId()) ? null : iSubjectService.selectById(paper.getSubjectId()));
 			model.addObject("course", StringUtils.isEmpty(paper.getCourseId()) ? null : iCourseService.selectById(paper.getCourseId()));
-			model.addObject("questionList", iQuestionService.selectList(Condition.create().eq("paper_id", paperId)));
 
+			// 查询试卷题目
+			model.addObject("questionList", iPaperService.findQuestionList(paperId));
 	    	// 获取推荐试卷
 			model.addObject("zhentiPaperList", iPaperService.selectPage(new Page<PaperEntity>(1, 5) , Condition.create().eq("subject_id", paper.getSubjectId()).eq("type",SystemConstant.ZHENGTI_PAPER_ID)).getRecords());
 			model.addObject("moniPaperList", iPaperService.selectPage(new Page<PaperEntity>(1, 5) , Condition.create().eq("subject_id", paper.getSubjectId()).eq("type",SystemConstant.MONI_PAPER_ID)).getRecords());
@@ -125,10 +127,10 @@ public class PaperController {
 			
 
 			if(BrowserUtils.isMobile(request.getHeader("user-agent"))) {
-	    		model.setViewName("mobile/paper");
-	    	}else {
-	    		model.setViewName("paper");
-	    	}
+				model.setViewName("mobile/paper");
+			}else {
+				model.setViewName("paper");
+			}
 			return model;
 		} catch (Exception e) {
 			model.setViewName("404");

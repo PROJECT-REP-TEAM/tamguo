@@ -67,6 +67,12 @@
 			<artifactId>commons-email</artifactId>
 			<version>1.5</version>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.20</version>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 
 	<build>

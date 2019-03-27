@@ -4,6 +4,7 @@ import java.util.List;
 import com.baomidou.mybatisplus.service.IService;
 import com.tamguo.common.utils.Result;
 import com.tamguo.modules.tiku.model.PaperEntity;
+import com.tamguo.modules.tiku.model.QuestionEntity;
 
 public interface IPaperService extends IService<PaperEntity>{
 
@@ -25,4 +26,6 @@ public interface IPaperService extends IService<PaperEntity>{
 	void addPaper(PaperEntity paper);
 
 	Result updatePaper(PaperEntity paper , String currMemberId);
+
+	List<QuestionEntity> findQuestionList(String paperId);
 }

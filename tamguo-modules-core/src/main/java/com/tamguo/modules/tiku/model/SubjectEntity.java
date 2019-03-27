@@ -8,7 +8,9 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.FieldFill;
 import com.tamguo.modules.tiku.model.enums.SubjectStatusEnum;
+import lombok.Data;
 
+@Data
 @TableName(value="t_subject")
 public class SubjectEntity {
 	
@@ -33,79 +35,4 @@ public class SubjectEntity {
 	
 	@JSONField(serialzeFeatures= SerializerFeature.WriteEnumUsingToString)
 	private SubjectStatusEnum status;
-	
-
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getSort() {
-		return sort;
-	}
-	public void setSort(String sort) {
-		this.sort = sort;
-	}
-	public String getCreateBy() {
-		return createBy;
-	}
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
-	public String getUpdateBy() {
-		return updateBy;
-	}
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
-	}
-	public Date getCreateDate() {
-		return createDate;
-	}
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
-	public SubjectStatusEnum getStatus() {
-		return status;
-	}
-	public void setStatus(SubjectStatusEnum status) {
-		this.status = status;
-	}
-	public String getRemarks() {
-		return remarks;
-	}
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getSeoTitle() {
-		return seoTitle;
-	}
-	public void setSeoTitle(String seoTitle) {
-		this.seoTitle = seoTitle;
-	}
-	public String getSeoKeywords() {
-		return seoKeywords;
-	}
-	public void setSeoKeywords(String seoKeywords) {
-		this.seoKeywords = seoKeywords;
-	}
-	public String getSeoDescription() {
-		return seoDescription;
-	}
-	public void setSeoDescription(String seoDescription) {
-		this.seoDescription = seoDescription;
-	}
-	
 }

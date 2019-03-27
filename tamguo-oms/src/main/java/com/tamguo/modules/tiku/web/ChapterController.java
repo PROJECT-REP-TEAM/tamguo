@@ -17,7 +17,7 @@ import com.tamguo.modules.tiku.service.IChapterService;
 
 @Controller
 @RequestMapping(path="tiku/chapter")
-public class ChapterController {
+public class  {
 	
 	private final String ADD_CHAPTER_PAGE = "modules/tiku/chapter/add";
 	private final String UPDATE_CHAPTER_PAGE = "modules/tiku/chapter/update";

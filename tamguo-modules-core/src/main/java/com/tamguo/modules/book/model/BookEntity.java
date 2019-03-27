@@ -8,7 +8,9 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import lombok.Data;
 
+@Data
 @TableName(value="b_book")
 public class BookEntity extends Model<BookEntity>{
 
@@ -32,87 +34,9 @@ public class BookEntity extends Model<BookEntity>{
 	private String memberName;
 	@TableField(exist=false)
 	private String categoryName;
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getCategoryId() {
-		return categoryId;
-	}
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
-	public String getOwner() {
-		return owner;
-	}
-	public void setOwner(String owner) {
-		this.owner = owner;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getSeoTitle() {
-		return seoTitle;
-	}
-	public void setSeoTitle(String seoTitle) {
-		this.seoTitle = seoTitle;
-	}
-	public String getSeoKeywords() {
-		return seoKeywords;
-	}
-	public void setSeoKeywords(String seoKeywords) {
-		this.seoKeywords = seoKeywords;
-	}
-	public String getSeoDescription() {
-		return seoDescription;
-	}
-	public void setSeoDescription(String seoDescription) {
-		this.seoDescription = seoDescription;
-	}
-	public Date getCreateDate() {
-		return createDate;
-	}
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
-	public String getBookImage() {
-		return bookImage;
-	}
-	public void setBookImage(String bookImage) {
-		this.bookImage = bookImage;
-	}
+
 	@Override
 	protected Serializable pkVal() {
 		return getId();
-	}
-	public List<String> getCategoryIds() {
-		return categoryIds;
-	}
-	public void setCategoryIds(List<String> categoryIds) {
-		this.categoryIds = categoryIds;
-	}
-	public String getMemberName() {
-		return memberName;
-	}
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
-	public String getCategoryName() {
-		return categoryName;
-	}
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
 	}
 }

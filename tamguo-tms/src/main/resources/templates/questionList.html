@@ -51,6 +51,13 @@
 						               <p><span>社会工作专业化是在长期社会服务实践中形成，在实践中被接受的。在专业化过程中，社会工作发展的重要特点包括(  )。</span><br><br><span>                A．专业理论的完善</span><br><span>B．专业方法的发展</span><br><span>C．目标模式的变化</span><br><span>D．工作对象的拓展</span><br><span>E．理论派别的形成</span><br></p>
 						            </div>
 						        </div>
+								<div class="que-options">
+									<div class="queoptions-inner bdjson clearfix">
+										<div class="opt-item" style="display: block;" th:each="o,qStat:${q.questionOptions}">
+											<p class="ext_text-align_left"><span class="prefix" th:text="${o.optionNo}">A</span><span th:text="${o.option}">tRNA分子中含有一定数量的氢键</span></p>
+										</div>
+									</div>
+								</div>
 						        <div class="view-analyse">
 								    <a class="view-link" th:href="${domainName + 'question/' + q.id + '.html'}">查看题目解析 &gt;</a>
 								</div>

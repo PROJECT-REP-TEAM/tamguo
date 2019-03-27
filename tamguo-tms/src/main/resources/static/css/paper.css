@@ -680,3 +680,25 @@
     font-size: xx-large;
     content: " x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x ";
 }
+.quelist-wrap .question-box .question-box-inner .que-options {
+    font-size: 16px;
+    color: #828386;
+    margin-top: 20px;
+    line-height: 1.5;
+}
+.quelist-wrap .question-box .question-box-inner .que-options .opt-item {
+    display: inline-block;
+    padding-right: 20px;
+}
+.quelist-wrap .question-box .question-box-inner .que-options .opt-item p {
+    display: inline-block;
+}
+.bdjson .ext_text-align_left {
+    text-align: left;
+}
+.quelist-wrap .question-box .question-box-inner .que-options .opt-item .prefix {
+    padding-right: 10px;
+}
+.quelist-wrap .question-box .question-box-inner .que-options .opt-item .prefix::after {
+    content: '. ';
+}

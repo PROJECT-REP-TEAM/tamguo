@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import com.tamguo.modules.tiku.dao.QuestionOptionsMapper;
+import com.tamguo.modules.tiku.model.QuestionEntity;
+import com.tamguo.modules.tiku.model.QuestionOptionsEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +42,8 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, PaperEntity> impl
 	private CacheService cacheService;
 	@Autowired
 	private QuestionMapper questionMapper;
+	@Autowired
+	private QuestionOptionsMapper questionOptionsMapper;
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -187,12 +192,15 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, PaperEntity> impl
 		return Result.result(Result.SUCCESS_CODE, paper, "修改成功");
 	}
 
-	public ISubjectService getiSubjectService() {
-		return iSubjectService;
-	}
-
-	public void setiSubjectService(ISubjectService iSubjectService) {
-		this.iSubjectService = iSubjectService;
+	@Override
+	public List<QuestionEntity> findQuestionList(String paperId) {
+		// 查询选项信息
+		List<QuestionEntity> questionList = questionMapper.selectList(Condition.create().eq("paper_id", paperId));
+		questionList.forEach(question -> {
+			List<QuestionOptionsEntity> questionOptions = questionOptionsMapper.selectList(Condition.create().eq("question_id" , question.getId()));
+			question.setQuestionOptions(questionOptions);
+		});
+		return questionList;
 	}
 
 }

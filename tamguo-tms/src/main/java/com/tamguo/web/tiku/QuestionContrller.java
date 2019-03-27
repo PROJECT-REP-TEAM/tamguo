@@ -1,11 +1,14 @@
 package com.tamguo.web.tiku;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.tamguo.modules.tiku.model.*;
+import com.tamguo.modules.tiku.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.baomidou.mybatisplus.mapper.Condition;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.tamguo.common.utils.Result;
-import com.tamguo.modules.tiku.model.ChapterEntity;
-import com.tamguo.modules.tiku.model.CourseEntity;
-import com.tamguo.modules.tiku.model.QuestionEntity;
-import com.tamguo.modules.tiku.model.SubjectEntity;
 import com.tamguo.modules.tiku.model.enums.QuestionTypeEnum;
 import com.tamguo.modules.tiku.model.queue.LearnChapterQueue;
-import com.tamguo.modules.tiku.service.IChapterService;
-import com.tamguo.modules.tiku.service.ICourseService;
-import com.tamguo.modules.tiku.service.IQuestionAnswerService;
-import com.tamguo.modules.tiku.service.IQuestionService;
-import com.tamguo.modules.tiku.service.ISubjectService;
 import com.tamguo.utils.BrowserUtils;
 
 @Controller
@@ -47,7 +41,9 @@ public class QuestionContrller {
 	private ICourseService iCourseService;
 	@Autowired
 	private IQuestionAnswerService iQuestionAnswerService;
-	
+	@Autowired
+	private IQuestionOptionsService iQuestionOptionsService;
+
 	// 章节
 	BlockingQueue<ChapterEntity> chapterQueue = new LinkedBlockingQueue<ChapterEntity>(10);
 	
@@ -104,6 +100,8 @@ public class QuestionContrller {
 		logger.info("request url :{}" , request.getRequestURI());
 		model.setViewName("question");
 		QuestionEntity question = iQuestionService.selectById(uid);
+		List<QuestionOptionsEntity> questionOptions = iQuestionOptionsService.selectList(Condition.create().eq("question_id" , question.getId()));
+		question.setQuestionOptions(questionOptions);
 		question.setQuestionType(QuestionTypeEnum.getQuestionType(question.getQuestionType()).getDesc());
 		model.addObject("question", question);
 		model.addObject("course", iCourseService.selectById(question.getCourseId()));

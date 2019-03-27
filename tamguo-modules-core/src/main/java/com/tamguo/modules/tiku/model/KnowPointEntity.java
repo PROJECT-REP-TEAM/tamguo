@@ -8,7 +8,9 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.FieldFill;
 import com.tamguo.modules.tiku.model.enums.BookStatusEnum;
+import lombok.Data;
 
+@Data
 @TableName(value="t_know_point")
 public class KnowPointEntity {
 
@@ -39,134 +41,5 @@ public class KnowPointEntity {
 	private String subjectName;
 	@TableField(exist=false)
 	private String courseName;
-	
-
-	public String getSubjectId() {
-		return subjectId;
-	}
-
-	public void setSubjectId(String subjectId) {
-		this.subjectId = subjectId;
-	}
-
-	public String getCourseId() {
-		return courseId;
-	}
-
-	public void setCourseId(String courseId) {
-		this.courseId = courseId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPublishingHouse() {
-		return publishingHouse;
-	}
-
-	public void setPublishingHouse(String publishingHouse) {
-		this.publishingHouse = publishingHouse;
-	}
-
-	public Integer getQuestionNum() {
-		return questionNum;
-	}
-
-	public void setQuestionNum(Integer questionNum) {
-		this.questionNum = questionNum;
-	}
-
-	public Integer getPointNum() {
-		return pointNum;
-	}
-
-	public void setPointNum(Integer pointNum) {
-		this.pointNum = pointNum;
-	}
-
-	public Integer getSort() {
-		return sort;
-	}
-
-	public void setSort(Integer sort) {
-		this.sort = sort;
-	}
-
-	public String getCreateBy() {
-		return createBy;
-	}
-
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
-
-	public String getUpdateBy() {
-		return updateBy;
-	}
-
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
-	}
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
-
-	public String getSubjectName() {
-		return subjectName;
-	}
-
-	public void setSubjectName(String subjectName) {
-		this.subjectName = subjectName;
-	}
-
-	public String getCourseName() {
-		return courseName;
-	}
-
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getRemarks() {
-		return remarks;
-	}
-
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
-
-	public BookStatusEnum getStatus() {
-		return status;
-	}
-
-	public void setStatus(BookStatusEnum status) {
-		this.status = status;
-	}
 	
 }

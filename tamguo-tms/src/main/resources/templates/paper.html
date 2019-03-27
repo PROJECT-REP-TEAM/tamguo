@@ -2,7 +2,7 @@
 <html lang="Zh-hans" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title th:text="${'探果网_' + paper.name}">探果网_聪明的学生都在这里</title>
+	<title th:text="${paper.name + ' - 探果网'}">聪明的学生都在这里 - 探果网</title>
 	<meta name="keywords" th:content="${#strings.isEmpty(course.seoKeywords) ? subject.seoKeywords : course.seoKeywords}"/>
 	<meta name="description" th:content="${#strings.isEmpty(course.seoDescription) ? subject.seoDescription : course.seoDescription}"/>
 	<meta name="author" content="Tamguo Team" />
@@ -88,23 +88,33 @@
     		<div class="bd-content" style="visibility: visible;">
 	        	<div class="quelist-wrap">
 	        	<div class="ques-container" th:each="p,pStat:${paper.queInfo}">
-	        			<div class="ques-info-wrap">
+	        		<div class="ques-info-wrap">
 			            <span class="que-type" th:text="${p.name}">单选题</span>
 			            <span class="que-info" th:text="${p.title}"></span>
 			        </div>
-	                <div th:attr="data-id=${q.id},data-index=${q.id}" class="question-box que-multi" th:if="${q.questionType == p.type}" th:each="q,qStat:${questionList}">
-						    <div class="question-box-inner" >
-						        <span class="queindex-wrap"><span class="queindex" th:text="${qStat.index + 1}">1</span></span>
-						        <span class="pieces" th:text="${p.name}">
-						                多选题
-						        </span>
-						        <div class="que-stem">
-						            <div class="questem-inner bdjson" th:utext="${q.content }"><p><span>社会工作专业化是在长期社会服务实践中形成，在实践中被接受的。在专业化过程中，社会工作发展的重要特点包括(  )。</span><br><br><span>                A．专业理论的完善</span><br><span>B．专业方法的发展</span><br><span>C．目标模式的变化</span><br><span>D．工作对象的拓展</span><br><span>E．理论派别的形成</span><br></p></div>
-						        </div>
-						        <div class="view-analyse">
-								    <a class="view-link" th:href="${domainName + 'question/' + q.id + '.html'}">查看题目解析 &gt;</a>
+
+					<div th:attr="data-id=${q.id},data-index=${q.id}" class="question-box que-select" th:if="${q.questionType == p.type}" th:each="q,qStat:${questionList}">
+						<div class="question-box-inner">
+							<span class="queindex-wrap"><span class="queindex" th:text="${qStat.index + 1}">1</span></span>
+
+							<span class="pieces" th:text="${p.name + ' . ' + q.score}">单选题· 2 分</span>
+
+							<div class="que-stem">
+								<div class="questem-inner bdjson">
+									<p class="ext_text-align_left" th:utext="${q.getContent()}">下列关于细胞中化合物及其化学键的叙述，正确的是(　　)</p>
 								</div>
-						    </div>	
+							</div>
+							<div class="que-options">
+								<div class="queoptions-inner bdjson clearfix">
+									<div class="opt-item" style="display: block;" th:each="o,qStat:${q.questionOptions}">
+										<p class="ext_text-align_left"><span class="prefix" th:text="${o.optionNo}">A</span><span th:text="${o.option}">tRNA分子中含有一定数量的氢键</span></p>
+									</div>
+								</div>
+							</div>
+							<div class="view-analyse">
+								<a class="view-link" th:href="${domainName + 'question/' + q.id + '.html'}">查看题目解析 &gt;</a>
+							</div>
+						</div>
 					</div>
 				</div>
 				
