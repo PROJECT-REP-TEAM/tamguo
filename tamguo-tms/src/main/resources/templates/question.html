@@ -41,7 +41,7 @@
 									<div class="que-options">
 										<div class="queoptions-inner bdjson clearfix">
 											<div class="opt-item" style="display: block;" th:each="o,qStat:${question.questionOptions}">
-												<p class="ext_text-align_left"><span class="prefix" th:text="${o.optionNo}">A</span><span th:text="${o.option}">tRNA分子中含有一定数量的氢键</span></p>
+												<p class="ext_text-align_left"><span class="prefix" th:text="${o.optionNo}">A</span><span th:utext="${o.option}">tRNA分子中含有一定数量的氢键</span></p>
 											</div>
 										</div>
 									</div>

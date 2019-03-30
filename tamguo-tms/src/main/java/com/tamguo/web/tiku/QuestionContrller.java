@@ -66,6 +66,8 @@ public class QuestionContrller {
 		Page<QuestionEntity> questionList = iQuestionService.selectPage(page , Condition.create().eq("chapter_id", chapterId).orderDesc(Arrays.asList("id")));
 		for(int i=0 ;i<questionList.getRecords().size() ; i++) {
 			QuestionEntity question = questionList.getRecords().get(i);
+			List<QuestionOptionsEntity> questionOptions = iQuestionOptionsService.selectList(Condition.create().eq("question_id" , question.getId()));
+			question.setQuestionOptions(questionOptions);
 			question.setQuestionType(QuestionTypeEnum.getQuestionType(question.getQuestionType()).getDesc());
 		}
 		model.addObject("subject", subject);
