@@ -209,3 +209,12 @@
     margin-top: 20px;
     line-height: 1.5;
 }
+.single .question .question-box .que-options .opt-item .prefix::after {
+    content: '. ';
+}
+.bdjson p {
+    line-height: 1.5;
+}
+.single .question .question-box .que-options .opt-item p {
+    display: inline-block;
+}
